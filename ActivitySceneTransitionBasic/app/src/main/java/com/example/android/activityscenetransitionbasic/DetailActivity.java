@@ -16,14 +16,21 @@
 
 package com.example.android.activityscenetransitionbasic;
 
+import android.annotation.SuppressLint;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.Transition;
+import android.util.Pair;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.view.ViewCompat;
 
 import com.squareup.picasso.Picasso;
@@ -70,6 +77,20 @@ public class DetailActivity extends AppCompatActivity {
         // END_INCLUDE(detail_set_view_name)
 
         loadItem();
+
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailActivity.this, DetailDetailActivity.class);
+                intent.putExtra(DetailActivity.EXTRA_PARAM_ID, getIntent().getIntExtra(EXTRA_PARAM_ID, 0));
+
+                startActivity(intent,
+                        ActivityOptions.makeSceneTransitionAnimation(DetailActivity.this,
+                                new android.util.Pair<View, String>(mHeaderImageView,
+                                        DetailActivity.VIEW_NAME_HEADER_IMAGE)).toBundle());
+            }
+        });
     }
 
     private void loadItem() {

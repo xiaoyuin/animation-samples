@@ -18,7 +18,7 @@
 
     <!-- Activity theme -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <!-- Set the transitions which are used for the entrance and exit of shared elements -->
+<!--         Set the transitions which are used for the entrance and exit of shared elements -->
         <item name="android:windowSharedElementEnterTransition" tools:ignore="NewApi">
             @transition/grid_detail_transition
         </item>
